@@ -74,7 +74,7 @@ g + geom_line(color="blue") +
 
 4. What interval has the highest average number of steps?
 
-```{r, echo=TRUE}
+```{r Intervals, echo=TRUE}
 
 max.interval <- monitor.pattern$interval[which.max(monitor.pattern$mean)]
 cat(paste("Interval corresponding to maximum average number of steps:",
@@ -83,7 +83,7 @@ cat(paste("Interval corresponding to maximum average number of steps:",
 
 5. Imputing missing values
 
-```{r, echo=FALSE}
+```{r Missing, echo=FALSE}
 
 nmissing <- sum(!complete.cases(monitor))
 cat(paste("Number of rows with missing data:", nmissing))
@@ -141,7 +141,7 @@ Are there differences in monitor patterns between weekdays and weekends?
 
 Add a factor variable for weekday vs. weekend:
 
-```{r}
+```{r weekdayend, echo=FALSE}
 
 daytype <- function(date) 
     if (weekdays(date) %in% c("Saturday", "Sunday")) "weekend" else "weekday"
