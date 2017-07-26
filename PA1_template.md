@@ -1,4 +1,5 @@
 # Reproducible Research: Peer Assessment 1
+SatyaBharat  
 
 
 ## Activity Monitor Data Assignment
@@ -75,11 +76,11 @@ g + geom_line(color="blue") +
 ## For the imputed the mean and median per day are: 10766.19 and 10766.19
 ```
 
-![](figure/Missing-1.png)<!-- -->
+![](figure/ImputingMissing-1.png)<!-- -->
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-
+![](figure/weekdayend-1.png)<!-- -->
 
 

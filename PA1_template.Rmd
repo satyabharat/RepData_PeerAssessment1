@@ -1,5 +1,6 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+author: "SatyaBharat"
 output: 
   html_document:
     keep_md: true
@@ -8,11 +9,11 @@ output:
 
 ## Activity Monitor Data Assignment
 
-```{r libraryload, echo=FALSE}
+```{r libraryload, echo=TRUE}
 
 library(knitr, quiet=T)
-library(plyr, quiet=T)  # For munging
-library(ggplot2, quiet=T)  # For plotting
+library(plyr, quiet=T)  
+library(ggplot2, quiet=T) 
 opts_chunk$set(dev="png", fig.path="figure/")
 
 ```
@@ -68,7 +69,7 @@ g + geom_line(color="blue") +
 
 ## Imputing missing values
 
-```{r Missing, echo=FALSE}
+```{r ImputingMissing, echo=FALSE}
 
 nmissing <- sum(!complete.cases(monitor))
 
@@ -109,7 +110,17 @@ hist(total.steps.imputed, col="purple", main="Fitness Tracker Activity",
 
 daytype <- function(date) 
     if (weekdays(date) %in% c("Saturday", "Sunday")) "weekend" else "weekday"
+
 imputed.monitor$day.type <- as.factor(sapply(imputed.monitor$date, daytype))
+
+
+steps.day.daytype <- ddply(imputed.monitor, .(interval, day.type),
+                           summarize, steps=mean(steps))
+
+ggplot(steps.day.daytype, aes(interval, steps)) + 
+    geom_line() + facet_grid(day.type ~ .) +
+    labs(x="Time of Day (min)", y="Number of steps",
+         title="Activity patterns on weekdays vs. weekends")
 
 ```
 
