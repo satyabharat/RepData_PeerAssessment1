@@ -5,12 +5,25 @@ SatyaBharat
 ## Activity Monitor Data Assignment
 
 
+```r
+library(knitr, quiet=T)
+library(plyr, quiet=T)  
+```
+
 ```
 ## Warning: package 'plyr' was built under R version 3.4.1
 ```
 
+```r
+library(ggplot2, quiet=T) 
+```
+
 ```
 ## Warning: package 'ggplot2' was built under R version 3.4.1
+```
+
+```r
+opts_chunk$set(dev="png", fig.path="figure/")
 ```
 
 ## Loading and preprocessing the data
@@ -20,23 +33,7 @@ SatyaBharat
 
 ## What is mean total number of steps taken per day?
 
-
-```r
-monitor.daily <- ddply(monitor, .(date.factor), summarize,
-                        total.steps=sum(steps, na.rm=TRUE))
-hist(monitor.daily$total.steps, col="blue", main=" Activity",
-     xlab="no.of Steps Per Day")
-```
-
 ![](figure/stepsperday-1.png)<!-- -->
-
-```r
-pdaymean <- mean(monitor.daily$total.steps, na.rm=TRUE)
-pdaymedian <- median(monitor.daily$total.steps, na.rm=TRUE)
-cat(paste("The mean number of steps per day is", 
-          format(pdaymean, digits=4), "and the median is", 
-          format(pdaymedian, digits=2), "(ignoring missing values"))
-```
 
 ```
 ## The mean number of steps per day is 9354 and the median is 10395 (ignoring missing values
@@ -46,17 +43,6 @@ cat(paste("The mean number of steps per day is",
 
 
 ## What is the average daily activity pattern?
-
-
-```r
-monitor.pattern <- ddply(monitor, "interval", summarize,
-                          mean=mean(steps, na.rm=TRUE))
-g <- ggplot(monitor.pattern, aes(interval, mean))
-g + geom_line(color="blue") + 
-  labs(title="Fitness monitor", 
-       x="Interval through day (min)",
-       y="Mean no.of steps")
-```
 
 ![](figure/dailyactivitypattern-1.png)<!-- -->
 

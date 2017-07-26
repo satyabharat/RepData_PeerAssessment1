@@ -34,11 +34,11 @@ monitor$date <- as.Date(monitor$date, format="%Y-%m-%d")
 
 ## What is mean total number of steps taken per day?
 
-```{r stepsperday, echo=TRUE}
+```{r stepsperday, echo=FALSE}
 
 monitor.daily <- ddply(monitor, .(date.factor), summarize,
                         total.steps=sum(steps, na.rm=TRUE))
-hist(monitor.daily$total.steps, col="blue", main=" Activity",
+hist(monitor.daily$total.steps, col="yellow", main=" Activity",
      xlab="no.of Steps Per Day")
 
 
@@ -54,12 +54,12 @@ cat(paste("The mean number of steps per day is",
 
 ## What is the average daily activity pattern?
 
-```{r dailyactivitypattern, echo=TRUE}
+```{r dailyactivitypattern, echo=FALSE}
 
 monitor.pattern <- ddply(monitor, "interval", summarize,
                           mean=mean(steps, na.rm=TRUE))
 g <- ggplot(monitor.pattern, aes(interval, mean))
-g + geom_line(color="blue") + 
+g + geom_line(color="green") + 
   labs(title="Fitness monitor", 
        x="Interval through day (min)",
        y="Mean no.of steps")
